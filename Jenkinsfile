@@ -9,12 +9,14 @@ pipeline {
         }
         stage('Docker build') {
             steps {
-                sh 'echo "Building App image"'
-                sh 'docker images -a'
-                sh 'cd ./App'
-                sh 'docker build -t panish-jenkins-pipeline .'
-                sh 'docker images -a'
-                sh '..
+                sh '''
+                echo "Building App image"
+                docker images -a
+                cd ./App
+                docker build -t panish-jenkins-pipeline .
+                docker images -a
+                cd ../
+                '''
             }
         }
         
