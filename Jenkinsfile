@@ -48,7 +48,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Pushing Docker image"
-                docker docker push panish/node-app1:1.0
+                docker push panish/node-app1:1.0
                 '''
             }
         }
