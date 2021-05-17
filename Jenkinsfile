@@ -16,7 +16,7 @@ pipeline {
                 echo "Building App image"
                 docker images -a
                 cd ./App
-                docker build -t panish-jenkins-pipeline .
+                docker build -t panish/nodeApp1:1.0 .
                 docker images -a
                 cd ../
                 '''
