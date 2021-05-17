@@ -1,8 +1,12 @@
 pipeline {
-    environment {
-        registry = "docker_hub_account/repository_name"
+    agent {
+    // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
+    dockerfile {
+        filename 'Dockerfile'
+        dir 'App'
+        args '-t panish/nodeApp1:1.0'
     }
-    agent any
+}
 
     stages {
         stage('Verify Branch') {
@@ -14,11 +18,6 @@ pipeline {
             steps {
                 sh '''
                 echo "Building App image"
-                docker images -a
-                cd ./App
-                docker build -t panish/node-App1:1.0 .
-                docker images -a
-                cd ../
                 '''
             }
         }
