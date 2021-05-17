@@ -7,14 +7,14 @@ pipeline {
                 echo "$GIT_BRANCH"
             }
         }
-        stage('Bye') {
+        stage('Docker build') {
             steps {
-                echo 'bye bye!!'
-            }
-        }
-        stage('From shell script') {
-            steps {
-                sh 'time'
+                sh 'echo "Building App image"'
+                sh 'docker images -a'
+                sh 'cd ./App'
+                sh 'docker build -t panish-jenkins-pipeline .'
+                sh 'docker images -a'
+                sh '..
             }
         }
         
