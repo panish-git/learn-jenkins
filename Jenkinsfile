@@ -57,8 +57,8 @@ pipeline {
         }
         
         stage('Approval For Production') {
-            when { 
-                branch 'origin/main' 
+            when {
+                expression { $GIT_BRANCH == 'origin/main' }
             }
             options {
                 timeout(time: 1, unit: 'HOURS')
@@ -77,8 +77,8 @@ pipeline {
         }
         
         stage('Deploy To Prod') {
-            when { 
-                branch 'origin/main'
+            when {
+                expression { $GIT_BRANCH == 'origin/main' }
             }
             environment {
                 ENVIRONMENT = 'prod'
