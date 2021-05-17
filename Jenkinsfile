@@ -58,7 +58,7 @@ pipeline {
         
         stage('Approval For Production') {
             when { 
-                branch 'main' 
+                branch 'origin/main' 
             }
             options {
                 timeout(time: 1, unit: 'HOURS')
@@ -78,7 +78,7 @@ pipeline {
         
         stage('Deploy To Prod') {
             when { 
-                branch 'main'
+                branch 'origin/main'
             }
             environment {
                 ENVIRONMENT = 'prod'
