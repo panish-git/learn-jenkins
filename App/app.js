@@ -1,17 +1,41 @@
-// Simple node.js web app for demonstrating containerizing apps
-// For quick demo purposes only (not properly maintained)
-'use strict';
+const express = require("express");
 
-var express = require('express'),
-    app = express();
+const app = express();
 
-app.set('views', 'views');
-app.set('view engine', 'pug');
+const port = process.env.PORT || 8000
 
-app.get('/', function(req, res) {
-    res.render('home.pug', {
-  });
-});
+const bookRouter = express.Router();
 
-app.listen(8080);
-module.exports.getApp = app;
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+bookRouter.route('/books')
+	.get((req, res) => {
+		const response = { hello: 'This is book!!'};
+		res.json(response);
+})
+	.post((req, res) => {
+		const response = req.body;
+		console.log(response);
+		res.status(201).json(response);
+})
+
+bookRouter.route('/books/:bookName')
+	.get((req, res) => {
+		const bookName = req.params.bookName;
+		const response = { hello: 'This is book!!' + bookName};
+		res.json(response);
+})
+
+app.use('/api',bookRouter);
+
+app.get('/', (req, res)=>{
+	res.send('Welcome to Hello world node !!');
+
+})
+
+app.listen(port, ()=>{
+	console.log("Node App is running!!")
+})
