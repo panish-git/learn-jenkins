@@ -1,6 +1,12 @@
 pipeline {
-
     stages {
+        stage('Verify Docker') {
+            steps {
+                sh '''
+                which docker
+                '''
+            }
+        } 
         stage('Verify Branch') {
             steps {
                 echo "$GIT_BRANCH"
