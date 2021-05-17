@@ -13,7 +13,7 @@ pipeline {
                 stage('Verify Branch') {
                     steps {
                         echo "$GIT_BRANCH"
-                        echo env.BRANCH_NAME
+                        echo env.GIT_BRANCH
                     }
                 }     
             }
@@ -59,7 +59,7 @@ pipeline {
         
         stage('Approval For Production') {
             when {
-                expression { return env.BRANCH_NAME == 'main'; }
+                expression { return env.GIT_BRANCH == 'origin/main'; }
             }
             options {
                 timeout(time: 1, unit: 'HOURS')
@@ -79,7 +79,7 @@ pipeline {
         
         stage('Deploy To Prod') {
             when {
-                expression { return env.BRANCH_NAME == 'main'; }
+                expression { return env.GIT_BRANCH == 'origin/main'; }
             }
             environment {
                 ENVIRONMENT = 'prod'
