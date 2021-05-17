@@ -1,11 +1,22 @@
 pipeline {
-   agent any
+    agent any
 
-   stages {
-      stage('Stage 1') {
-         steps {
-            echo "Hello-World-From-$GIT_BRANCH"
-         }
-      }
-   }
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Bye') {
+            steps {
+                echo 'bye bye!!'
+            }
+        }
+        stage('From shell script') {
+            steps {
+                sh 'time'
+            }
+        }
+        
+    }
 }
