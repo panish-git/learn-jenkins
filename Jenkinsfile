@@ -19,7 +19,7 @@ pipeline {
                 echo "Building App image"
                 docker images -a
                 cd ./App
-                docker build -t panish/nodeApp:1.0 .
+                docker build -t panish/node-app1:1.0 .
                 docker images -a
                 cd ../
                 '''
