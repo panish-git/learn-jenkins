@@ -25,6 +25,33 @@ pipeline {
                 '''
             }
         }
+        stage('Test App') {
+            steps {
+                sh '''
+                echo "Testing App"
+                cd ./App
+                docker build -t nodeapp1-test -f Dockerfile.test
+                docker run -rm nodeapp1-test
+                '''
+            }
+            post {
+                success {
+                    echo "Test passed :)"
+                }
+                failure {
+                    echo "Test failed :("
+                }
+                
+            }
+        }
+        stage('Docker push image') {
+            steps {
+                sh '''
+                echo "Pushing Docker image"
+                docker docker push panish/node-app1:1.0
+                '''
+            }
+        }
         
     }
 }
