@@ -60,8 +60,11 @@ pipeline {
             when { 
                 branch 'main' 
             }
+            options {
+                timeout(time: 1, unit: 'HOURS')
+            }
             steps {
-                input message "Approve?"
+                input message: "Approve?"
             }
             post {
                 success {
