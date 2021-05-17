@@ -58,7 +58,7 @@ pipeline {
         
         stage('Approval For Production') {
             when {
-                expression { return env.BRANCH_NAME == 'origin/main'; }
+                expression { return env.BRANCH_NAME == 'main'; }
             }
             options {
                 timeout(time: 1, unit: 'HOURS')
@@ -78,7 +78,7 @@ pipeline {
         
         stage('Deploy To Prod') {
             when {
-                expression { return env.BRANCH_NAME == 'origin/main'; }
+                expression { return env.BRANCH_NAME == 'main'; }
             }
             environment {
                 ENVIRONMENT = 'prod'
