@@ -12,8 +12,14 @@ pipeline {
         }
         stage('Docker build') {
             steps {
-                pwsh(script: 'echo "Building App Container"')
-                pwsh(script: 'docker images -a')
+                sh '''
+                echo "Building App image"
+                docker images -a
+                cd ./App
+                docker build -t panish-jenkins-pipeline .
+                docker images -a
+                cd ../
+                '''
             }
         }
         
