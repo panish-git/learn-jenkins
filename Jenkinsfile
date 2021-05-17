@@ -31,7 +31,7 @@ pipeline {
                 echo "Testing App"
                 cd ./App
                 docker build -t nodeapp1-test -f Dockerfile.test .
-                docker run -rm nodeapp1-test
+                docker run --rm nodeapp1-test
                 '''
             }
             post {
