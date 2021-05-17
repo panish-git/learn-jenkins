@@ -1,4 +1,7 @@
 pipeline {
+    environment {
+        registry = "docker_hub_account/repository_name"
+    }
     agent any
 
     stages {
@@ -9,14 +12,8 @@ pipeline {
         }
         stage('Docker build') {
             steps {
-                sh '''
-                echo "Building App image"
-                docker images -a
-                cd ./App
-                docker build -t panish-jenkins-pipeline .
-                docker images -a
-                cd ../
-                '''
+                pwsh(script: 'echo "Building App Container"')
+                pwsh(script: 'docker images -a')
             }
         }
         
