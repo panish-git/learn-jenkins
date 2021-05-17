@@ -44,8 +44,7 @@ pipeline {
                 }
                 failure {
                     echo "Test failed :("
-                }
-                
+                }                
             }
         }
         stage('Docker push image') {
@@ -53,6 +52,38 @@ pipeline {
                 sh '''
                 echo "Pushing Docker image"
                 docker push panish/node-app1:1.0
+                '''
+            }
+        }
+        
+        stage('Approval For Production') {
+            when { 
+                branch 'main' 
+            }
+            steps {
+                input message "Approve?"
+            }
+            post {
+                success {
+                    echo "Prod deply approved :)"
+                }
+                aborted {
+                    echo "Prod deploy not approved :("
+                }                
+            }
+        }
+        
+        stage('Deploy To Prod') {
+            when { 
+                branch 'main'
+            }
+            environment {
+                ENVIRONMENT = 'prod'
+            }
+            steps {
+                echo "Deploying to ${ENVIRONMENT}"
+                sh '''
+                echo "Deploying to Prod K8s cluster"
                 '''
             }
         }
