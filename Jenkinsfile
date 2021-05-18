@@ -89,6 +89,9 @@ pipeline {
                 echo "Deploying to ${ENVIRONMENT}"
                 sh '''
                 echo "Deploying to Prod K8s cluster"
+                kubectl apply -f ./Deployments/svc-nodeport.yml
+                kubectl apply -f ./Deployments/deploy-complete.yml
+                kubectl set image deployment/web-deploy panish-app1-pod=panish/node-app1:${BUILD_NUMBER} --record
                 '''
             }
         }
