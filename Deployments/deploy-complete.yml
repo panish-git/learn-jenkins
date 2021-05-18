@@ -23,7 +23,7 @@ spec:
     spec: 
       terminationGracePeriodSeconds: 1
       containers:
-      - name: panishApp1-pod
+      - name: panish-app1-pod
         image: panish/node-app1:1.0
         imagePullPolicy: Always
         ports:
