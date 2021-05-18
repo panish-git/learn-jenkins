@@ -14,6 +14,7 @@ pipeline {
                     steps {
                         echo "$GIT_BRANCH"
                         echo env.GIT_BRANCH
+                        echo env.BUILD_NUMBER
                     }
                 }     
             }
