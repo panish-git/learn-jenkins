@@ -25,7 +25,7 @@ pipeline {
                 echo "Building App image"
                 docker images -a
                 cd ./App
-                docker build -t panish/node-app1:1.0 .
+                docker build -t panish/node-app1:${BUILD_NUMBER} .
                 docker images -a
                 cd ../
                 '''
@@ -53,7 +53,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Pushing Docker image"
-                docker push panish/node-app1:1.0
+                docker push panish/node-app1:${BUILD_NUMBER}
                 '''
             }
         }
